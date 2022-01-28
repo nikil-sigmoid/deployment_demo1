@@ -2,7 +2,7 @@ name: main_workflow
 
 on:
 
-  push:
+  pull_request:
     branches: [ main, test ]
     
 #   workflow_dispatch
