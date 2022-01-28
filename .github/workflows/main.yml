@@ -40,6 +40,9 @@ jobs:
         run: |
           ls -lrt
           pwd
+          cd source_code
+          pwd
+          ls
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
