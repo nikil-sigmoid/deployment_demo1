@@ -25,6 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: original repo files
+        run: |
+          ls -lrt
+          pwd
+      
       - uses: actions/checkout@v2
         with:
           repository: 'nikil-sigmoid/source_code_demo1'
