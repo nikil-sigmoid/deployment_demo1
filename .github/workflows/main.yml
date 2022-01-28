@@ -28,8 +28,10 @@ jobs:
       - name: List tracked files
         run: | 
           echo "branch: $GITHUB_BASE_REF"
-          cd my_files
-          ls –al | grep ‘^-‘
+          ls -lrt
+          cd source_code
+          # cd my_files
+          # ls –al | grep ‘^-‘
 
 #       - name: Docker build and run
 #         run: |
