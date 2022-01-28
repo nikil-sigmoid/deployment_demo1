@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: 'nikil-sigmoid/source_code_demo1'
-          ref: "$GITHUB_REF"
+          ref: $GITHUB_REF
 #           ref: 'main'
           path: 'source_code/'
 
