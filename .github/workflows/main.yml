@@ -28,5 +28,6 @@ jobs:
         run: |
           echo "Current directory: `pwd`"
           tag_name="deploy_image_branch_$GITHUB_REF"
-          docker build -t tag_name .
-          docker run deploy_image
+          echo "tag: $tag_name"
+          docker build -t $tag_name .
+          docker run $tag_name
