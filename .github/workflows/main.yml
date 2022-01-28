@@ -30,8 +30,7 @@ jobs:
           echo "branch: $GITHUB_BASE_REF"
           cd source_code
           cd my_files
-          ls –al | grep ‘^-‘
-
+          ls -l | grep '^-'
 #       - name: Docker build and run
 #         run: |
 #           echo "Current directory: `pwd`"
