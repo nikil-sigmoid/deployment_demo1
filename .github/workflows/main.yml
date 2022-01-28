@@ -34,7 +34,7 @@ jobs:
         with:
           repository: 'nikil-sigmoid/source_code_demo1'
           ref: 'main'
-#           path: 'source_code/'
+          path: 'source_code/'
 
       - name: list folders
         run: |
