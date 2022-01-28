@@ -23,11 +23,18 @@ jobs:
           ref: ${{ github.base_ref }}
 #           ref: 'main'
           path: 'source_code/'
+          
+          
+      - name: List tracked files
+        run: | 
+          echo "branch: $GITHUB_BASE_REF"
+          cd my_files
+          ls –al | grep ‘^-‘
 
-      - name: Docker build and run
-        run: |
-          echo "Current directory: `pwd`"
-          tag_name="deploy_image_branch_$GITHUB_BASE_REF"
-          echo "tag: $tag_name"
-          docker build -t $tag_name .
-          docker run $tag_name
+#       - name: Docker build and run
+#         run: |
+#           echo "Current directory: `pwd`"
+#           tag_name="deploy_image_branch_$GITHUB_BASE_REF"
+#           echo "tag: $tag_name"
+#           docker build -t $tag_name .
+#           docker run $tag_name
