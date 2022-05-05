@@ -52,9 +52,27 @@ jobs:
           echo "${#my_str}"
           my_arr=($(echo $my_str | tr ' ' '\n'))  
           for i in "${my_arr[@]}"  
-          do  
-          echo $i  
+            do  
+            echo $i  
           done  
+          
+          echo "Docker build will start here"
+          
+          if [[ "${#my_str}" -ne 0 ]]
+          then
+              cd containers
+              for dir in `ls -d */`; do
+                echo $dir
+                cd $dir
+                docker build .
+                echo `pwd`
+                cd ..
+                done
+          else
+            echo "no need here"
+          fi
+          
+          echo "Docker build ends here"
           
           
           # for file_path in "${{ steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE }}"; do
