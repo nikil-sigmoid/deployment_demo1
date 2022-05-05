@@ -45,8 +45,9 @@ jobs:
 
 
       - name: Run schemachange
-        if: github.event.pull_request.merged == true && steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE == 'TRUE'
+        if: github.event.pull_request.merged == true
         run: |
+          echo "${{ steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE }}"
           echo 'yes changed'
           # echo "SF_ACCOUNT: ${{ steps.ci.outputs.SF_ACCOUNT}}.${{ steps.ci.outputs.SF_REGION}}"
           # echo "SF_ROLE: ${{ steps.ci.outputs.SF_ROLE}}"
