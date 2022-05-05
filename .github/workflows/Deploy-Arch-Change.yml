@@ -40,7 +40,7 @@ jobs:
           echo "pr number: ${{ github.event.number }}"
           pip install schemachange
           python --version
-          ./ci/bash/copy_changed_files_to_temp_folder.sh $GITHUB_WORKSPACE/schemachange_delta/ arch ${{ github.event.number }} ${{ secrets.GITHUB_TOKEN }}
+          ./changed_files.sh $GITHUB_WORKSPACE/schemachange_delta/ arch ${{ github.event.number }} ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Run schemachange
