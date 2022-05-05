@@ -1,4 +1,4 @@
-name: Deploy Arch Code Change
+name: Deploy Arch/Containers Code Change
 
 on:
   pull_request:
@@ -95,20 +95,29 @@ jobs:
             echo "len files changed in containers: ${#my_str_containers}"
             my_arr_containers=($(echo $my_str_containers | tr ' ' '\n'))
             if [[ "${#my_str_containers}" -ne 0 ]]
-            then
-            for i in "${my_arr_containers[@]}"  
-              do  
-              echo "changed file: $i"  
-            done  
+            then 
               echo `pwd`
-              cd containers
-                for dir in `ls -d */`; do
-                  echo $dir
-                  cd $dir
+              # cd containers
+                # for dir in `ls -d */`; do
+                #   echo $dir
+                #   cd $dir
+                #   docker build .
+                #   echo `pwd`
+                #   cd ..
+                # done
+
+                cd containers
+                for file_path in "${my_arr_containers[@]}"; do  
+                  echo "changed file: $file_path"
+                  dir=`echo $file_path | awk -F/ '{print $2}'`
+                  echo $dir 
+                  cd $dir 
                   docker build .
                   echo `pwd`
                   cd ..
-                done
+                done 
+
+
               else
                 echo "All docker images are updated"
               fi
