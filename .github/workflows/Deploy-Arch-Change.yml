@@ -91,23 +91,27 @@ jobs:
                 cd ..
                 done
           else
-            echo "no need here"
             my_str_arch="${{ steps.selective_copy_arch.outputs.changed_files_list_string }}"  
             echo "${#my_str_arch}"
-            my_arr_arch=($(echo $my_str_arch | tr ' ' '\n'))  
-            for i in "${my_arr_arch[@]}"  
-              do  
-              echo $i  
-            done  
-            echo `pwd`
-            cd containers
-              for dir in `ls -d */`; do
-                echo $dir
-                cd $dir
-                docker build .
-                echo `pwd`
-                cd ..
+            my_arr_arch=($(echo $my_str_arch | tr ' ' '\n'))
+            if [[ "${#my_str_arch}" -ne 0 ]]
+            then
+            # for i in "${my_arr_arch[@]}"  
+            #   do  
+            #   echo $i  
+            # done  
+              echo `pwd`
+              cd containers
+                for dir in `ls -d */`; do
+                  echo $dir
+                  cd $dir
+                  docker build .
+                  echo `pwd`
+                  cd ..
                 done
+              else
+                echo "All docker images are updated"
+              fi
             fi
           
           echo "Docker build ends here"
