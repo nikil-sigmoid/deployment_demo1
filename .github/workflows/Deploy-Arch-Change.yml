@@ -68,19 +68,19 @@ jobs:
         if: github.event.pull_request.merged == true
         run: |
           echo 'yes changed'
-          echo "${{ steps.selective_copy_containers.outputs.changed_files_list_string }}"
+          echo "${{ steps.selective_copy_arch.outputs.changed_files_list_string }}"
           
-          my_str="${{ steps.selective_copy_containers.outputs.changed_files_list_string }}"  
-          echo "${#my_str}"
-          my_arr=($(echo $my_str | tr ' ' '\n'))  
-          for i in "${my_arr[@]}"  
+          my_str_arch="${{ steps.selective_copy_arch.outputs.changed_files_list_string }}"  
+          echo "len files changed in arch: ${#my_str_arch}"
+          my_arr_arch=($(echo $my_str_arch | tr ' ' '\n'))  
+          for i in "${my_arr_arch[@]}"  
             do  
             echo $i  
           done  
           
           echo "Docker build will start here"
           
-          if [[ "${#my_str}" -ne 0 ]]
+          if [[ "${#my_str_arch}" -ne 0 ]]
           then
               cd containers
               for dir in `ls -d */`; do
@@ -91,15 +91,15 @@ jobs:
                 cd ..
                 done
           else
-            my_str_arch="${{ steps.selective_copy_arch.outputs.changed_files_list_string }}"  
-            echo "${#my_str_arch}"
-            my_arr_arch=($(echo $my_str_arch | tr ' ' '\n'))
-            if [[ "${#my_str_arch}" -ne 0 ]]
+            my_str_containers="${{ steps.selective_copy_containers.outputs.changed_files_list_string }}"  
+            echo "len files changed in containers: ${#my_str_containers}"
+            my_arr_containers=($(echo $my_str_containers | tr ' ' '\n'))
+            if [[ "${#my_str_containers}" -ne 0 ]]
             then
-            # for i in "${my_arr_arch[@]}"  
-            #   do  
-            #   echo $i  
-            # done  
+            for i in "${my_arr_containers[@]}"  
+              do  
+              echo "changed file: $i"  
+            done  
               echo `pwd`
               cd containers
                 for dir in `ls -d */`; do
