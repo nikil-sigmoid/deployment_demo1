@@ -17,7 +17,7 @@ echo "Final changed files detected"
 echo $RESULT
 mkdir -p $TEMP_DIR_PATH
 my_array=($(echo $RESULT | tr ";" "\n"))
-echo "::set-output name=VALIDATE_CHANGES_SCHEMACHANGE::${my_array[@]}"
+echo "::set-output name=changed_files_list_string::${my_array[@]}"
 for file_name in "${my_array[@]}";do
 #    echo "::set-output name=VALIDATE_CHANGES_SCHEMACHANGE::TRUE"
    EPOCH_TIMESTAMP_WITH_MILLIS=".$(date +%s.%3N)_"
