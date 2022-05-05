@@ -106,10 +106,17 @@ jobs:
                 #   cd ..
                 # done
 
+
+                subdirs_list=()
+                for dir in "${my_arr_containers[@]}"; do
+                  subdirs_list+=(`echo $dir | awk -F/ '{print $2}'`)
+                done
+                
+                unique_subdirs_list=($(for v in "${subdirs_list[@]}"; do echo "$v";done| sort| uniq| xargs))
+                
                 cd containers
-                for file_path in "${my_arr_containers[@]}"; do  
+                for file_path in "${unique_subdirs_list[@]}"; do  
                   echo "changed file: $file_path"
-                  dir=`echo $file_path | awk -F/ '{print $2}'`
                   echo $dir 
                   cd $dir 
                   docker build .
