@@ -115,8 +115,8 @@ jobs:
                 unique_subdirs_list=($(for v in "${subdirs_list[@]}"; do echo "$v";done| sort| uniq| xargs))
                 
                 cd containers
-                for file_path in "${unique_subdirs_list[@]}"; do  
-                  echo "changed file: $file_path"
+                for dir in "${unique_subdirs_list[@]}"; do  
+                  echo "changed file: $dir"
                   echo $dir 
                   cd $dir 
                   docker build .
