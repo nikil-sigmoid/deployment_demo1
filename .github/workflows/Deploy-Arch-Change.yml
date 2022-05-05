@@ -50,6 +50,7 @@ jobs:
           echo "${{ steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE }}"
           
           my_str="${{ steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE }}"  
+          echo "${#my_str}"
           my_arr=($(echo $my_str | tr ' ' '\n'))  
           for i in "${my_arr[@]}"  
           do  
