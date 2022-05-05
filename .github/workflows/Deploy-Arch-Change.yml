@@ -60,11 +60,11 @@ jobs:
           pip install schemachange
           python --version
           chmod u+x changed_files.sh
-          ./changed_files.sh $GITHUB_WORKSPACE/schemachange_delta/ arch ${{ github.event.number }} ${{ secrets.GITHUB_TOKEN }}
+          ./changed_files.sh $GITHUB_WORKSPACE/schemachange_delta/ containers ${{ github.event.number }} ${{ secrets.GITHUB_TOKEN }}
 
 
 
-      - name: Run schemachange
+      - name: Update required docker images
         if: github.event.pull_request.merged == true
         run: |
           echo 'yes changed'
