@@ -8,7 +8,7 @@ echo "TEMP_DIR_PATH=>$TEMP_DIR_PATH"
 echo "FILTER_DIR=>$FILTER_DIR"
 echo "PR_NUMBER=>$PR_NUMBER"
 echo "BEARER_TOKEN=>$BEARER_TOKEN"
-python ./get_changed_files.py $PR_NUMBER arch/ $BEARER_TOKEN> result.log
+python ./get_changed_files.py $PR_NUMBER $FILTER_DIR $BEARER_TOKEN> result.log
 
 cat result.log
 
