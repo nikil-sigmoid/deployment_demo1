@@ -21,8 +21,8 @@ jobs:
         with:
           python-version: 3.8.x
           
-            
-      - id: selective_copy    
+          
+      - id: selective_copy_arch    
         name: Select files to copy
         if: github.event.pull_request.merged == true
         env:
@@ -42,13 +42,35 @@ jobs:
           ./changed_files.sh $GITHUB_WORKSPACE/schemachange_delta/ arch ${{ github.event.number }} ${{ secrets.GITHUB_TOKEN }}
 
 
+
+      - id: selective_copy_containers   
+        name: Select files to copy
+        if: github.event.pull_request.merged == true
+        env:
+          TEMP_DIR_PATH: '$GITHUB_WORKSPACE/schemachange_delta/'
+          FILTER_DIR: 'containers'
+          PR_NUMBER: ${{ github.event.number }}
+          BEARER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "github ref: $GITHUB_REF"
+          echo "github ref name: $GITHUB_REF_NAME"
+          echo "github sha: $GITHUB_SHA"
+          echo "pr number: ${{ github.event.number }}"
+          pip install schemachange
+          python --version
+          chmod u+x changed_files.sh
+          ./changed_files.sh $GITHUB_WORKSPACE/schemachange_delta/ arch ${{ github.event.number }} ${{ secrets.GITHUB_TOKEN }}
+
+
+
       - name: Run schemachange
         if: github.event.pull_request.merged == true
         run: |
           echo 'yes changed'
-          echo "${{ steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE }}"
+          echo "${{ steps.selective_copy_containers.outputs.changed_files_list_string }}"
           
-          my_str="${{ steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE }}"  
+          my_str="${{ steps.selective_copy_containers.outputs.changed_files_list_string }}"  
           echo "${#my_str}"
           my_arr=($(echo $my_str | tr ' ' '\n'))  
           for i in "${my_arr[@]}"  
@@ -70,12 +92,28 @@ jobs:
                 done
           else
             echo "no need here"
-          fi
+            my_str_arch="${{ steps.selective_copy_arch.outputs.changed_files_list_string }}"  
+            echo "${#my_str_arch}"
+            my_arr_arch=($(echo $my_str_arch | tr ' ' '\n'))  
+            for i in "${my_arr_arch[@]}"  
+              do  
+              echo $i  
+            done  
+            echo `pwd`
+            cd containers
+              for dir in `ls -d */`; do
+                echo $dir
+                cd $dir
+                docker build .
+                echo `pwd`
+                cd ..
+                done
+            fi
           
           echo "Docker build ends here"
           
           
-          # for file_path in "${{ steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE }}"; do
+          # for file_path in "${{ steps.selective_copy.outputs.changed_files_list_string }}"; do
           #   echo $file_path
           # done
           # echo "SF_ACCOUNT: ${{ steps.ci.outputs.SF_ACCOUNT}}.${{ steps.ci.outputs.SF_REGION}}"
