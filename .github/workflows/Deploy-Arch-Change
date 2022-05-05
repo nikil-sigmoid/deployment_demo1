@@ -1,0 +1,53 @@
+name: Deploy Arch Code Change
+
+on:
+  pull_request:
+    branches: 
+    types: [ closed ]
+
+
+jobs:
+  selectivecopy:
+    if: github.event.pull_request.merged == true
+    name: Selective Copy To Delta Folder
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Use Python 3.8.x
+        uses: actions/setup-python@v2.2.1
+        with:
+          python-version: 3.8.x
+          
+            
+      - id: selective_copy    
+        name: Select files to copy
+        if: github.event.pull_request.merged == true
+        env:
+          TEMP_DIR_PATH: '$GITHUB_WORKSPACE/schemachange_delta/'
+          FILTER_DIR: 'arch'
+          PR_NUMBER: ${{ github.event.number }}
+          BEARER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "github ref: $GITHUB_REF"
+          echo "github ref name: $GITHUB_REF_NAME"
+          echo "github sha: $GITHUB_SHA"
+          echo "pr number: ${{ github.event.number }}"
+          pip install schemachange
+          python --version
+          ./ci/bash/copy_changed_files_to_temp_folder.sh $GITHUB_WORKSPACE/schemachange_delta/ arch ${{ github.event.number }} ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Run schemachange
+        if: github.event.pull_request.merged == true && steps.selective_copy.outputs.VALIDATE_CHANGES_SCHEMACHANGE == 'TRUE'
+        run: |
+          echo 'yes changed'
+          # echo "SF_ACCOUNT: ${{ steps.ci.outputs.SF_ACCOUNT}}.${{ steps.ci.outputs.SF_REGION}}"
+          # echo "SF_ROLE: ${{ steps.ci.outputs.SF_ROLE}}"
+          # echo "SF_WAREHOUSE: ${{ steps.ci.outputs.SF_WAREHOUSE}}"
+          # echo "SF_ENV: ${{ steps.ci.outputs.PREFIX}}"
+        
