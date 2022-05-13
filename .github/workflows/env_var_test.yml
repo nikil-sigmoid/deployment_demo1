@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: env_var_test
 
 # Controls when the workflow will run
 on:
@@ -29,7 +29,8 @@ jobs:
       - name: Run a one-line script
         env:
           Name: 'Batman'
-        run: echo Hello, world!
+        run: |
+          echo Hello, world!
           chmod u+x env_var_test.sh
           ./env_var_test.sh
 
