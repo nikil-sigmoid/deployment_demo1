@@ -34,4 +34,5 @@ jobs:
         run: |
           chmod u+x ./env_var_test.sh
           ./env_var_test.sh
+          echo test
 
