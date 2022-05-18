@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # echo "$Name"
-echo "$temp_dir"
+echo "temp dir from script: $temp_dir"
