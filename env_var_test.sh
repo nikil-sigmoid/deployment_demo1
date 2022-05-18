@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "$Name"
+# echo "$Name"
+echo "$temp_dir"
