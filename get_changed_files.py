@@ -63,7 +63,6 @@ def main():
     RestApiCallToGithub(_url=URL, _folder_filter=folder_filter, _bearer_token=bearer_token) \
         .main()
 
-
     
 if __name__ == "__main__":
     main()
