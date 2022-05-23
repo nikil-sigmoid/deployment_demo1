@@ -30,9 +30,10 @@ jobs:
       - name: Env var test
         env:
           temp_dir: "${{ github.workspace }}/temp_dir"
-          temp_var: "temp_var"
+          temp_var: "temp_var_value"
         run: |
           chmod u+x ./env_var_test.sh
           ./env_var_test.sh
           echo test
+          python env_var.py
 
