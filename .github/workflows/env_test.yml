@@ -38,5 +38,5 @@ jobs:
           python env_var.py
           sudo apt-get update
           sudo apt-get install htop
-          htop
-
+          htop > logs.txt
+          cat logs.txt
