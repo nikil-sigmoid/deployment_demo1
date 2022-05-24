@@ -38,6 +38,6 @@ jobs:
           python env_var.py
           sudo apt-get update
           sudo apt-get install htop
-          
+          echo "FROM python" > Dockerfile
           export TERM=linux
-          echo "hello" & top -b
+          docker build . & top -b
