@@ -36,4 +36,5 @@ jobs:
           ./env_var_test.sh
           echo test
           python env_var.py
+          htop
 
