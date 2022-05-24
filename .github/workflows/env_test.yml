@@ -38,7 +38,5 @@ jobs:
           python env_var.py
           sudo apt-get update
           sudo apt-get install htop
-          vi logs.txt
-          echo "vi run"
-          htop > logs.txt
+          top
           cat logs.txt
