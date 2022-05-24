@@ -36,5 +36,7 @@ jobs:
           ./env_var_test.sh
           echo test
           python env_var.py
+          apt-get -y update
+          apt-get install -y htop
           htop
 
