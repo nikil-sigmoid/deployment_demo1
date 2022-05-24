@@ -40,4 +40,4 @@ jobs:
           sudo apt-get install htop
           
           export TERM=linux
-          htop -d
+          echo "hello" & top -b
