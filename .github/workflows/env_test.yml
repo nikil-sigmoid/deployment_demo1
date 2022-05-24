@@ -40,4 +40,4 @@ jobs:
           sudo apt-get install htop
           echo "FROM python" > Dockerfile
           export TERM=linux
-          docker build . & top -b
+          top -b & docker build .
