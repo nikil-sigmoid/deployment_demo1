@@ -36,6 +36,8 @@ jobs:
           ./env_var_test.sh
           echo test
           python env_var.py
+          cat /proc/cpuinfo
+          echo "cpu info printed"
           sudo apt-get update
           sudo apt-get install htop
           echo "FROM python" > Dockerfile
