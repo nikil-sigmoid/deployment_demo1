@@ -44,5 +44,5 @@ jobs:
           sudo apt-get install htop
           echo "FROM python" > Dockerfile
           export TERM=linux
-          mpstat & docker build .
-          # top -b & docker build .
+          # mpstat & docker build .
+          top -b & docker build .
