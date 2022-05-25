@@ -48,5 +48,8 @@ jobs:
           # top -b & docker build .
           sudo apt-get update
           sudo apt-get install -y recode
-          htop | recode utf-8 > test.txt
+          htop | recode utf-8 >> test.txt
+          echo "something"
+          echo "--------------" >> test.txt
+          htop | recode utf-8 >> test.txt
           cat test.txt
