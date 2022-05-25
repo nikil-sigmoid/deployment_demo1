@@ -37,6 +37,8 @@ jobs:
           echo test
           python env_var.py
           cat /proc/cpuinfo
+          sudo apt-get install sysstat
+          mpstat
           echo "cpu info printed"
           sudo apt-get update
           sudo apt-get install htop
