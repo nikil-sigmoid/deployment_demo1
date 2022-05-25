@@ -38,10 +38,11 @@ jobs:
           python env_var.py
           cat /proc/cpuinfo
           sudo apt-get install sysstat
-          mpstat
+          # mpstat
           echo "cpu info printed"
           sudo apt-get update
           sudo apt-get install htop
           echo "FROM python" > Dockerfile
           export TERM=linux
-          top -b & docker build .
+          mpstat & docker build .
+          # top -b & docker build .
