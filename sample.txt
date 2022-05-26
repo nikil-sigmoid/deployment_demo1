@@ -2,4 +2,4 @@ sample.txt
 nice.tx
 
 
-nice.yaml
+nice.txt
