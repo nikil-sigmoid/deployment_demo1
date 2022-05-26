@@ -1,5 +1,5 @@
 sample.txt
-nice.txt
+nice.tx
 
 
 nice.yaml
