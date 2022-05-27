@@ -1,4 +1,2 @@
 line_1
-line_4
-line_3
-line_5
+line_2
