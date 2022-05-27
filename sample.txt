@@ -1,5 +1,1 @@
-sample.txt
-nice.py
-
-
-nice.txt
+line_1
